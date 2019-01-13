@@ -10,6 +10,10 @@ class App extends Component {
         selectedVideo: null,
     };
 
+    componentDidMount() {
+        this.onTermSubmit('react js');
+    }
+
     onTermSubmit = async term => {
         const results = await youtube.get('/search', {
             params: {
@@ -17,7 +21,10 @@ class App extends Component {
             },
         });
 
-        this.setState({ videos: results.data.items });
+        this.setState({ 
+            videos: results.data.items,
+            selectedVideo: results.data.items[0],
+        });
     }
 
     onVideoSelect = video => {
